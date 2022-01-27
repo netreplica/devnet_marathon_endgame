@@ -46,17 +46,28 @@ NX_LAYER_SORT_ORDER = (
     'outside',
     'edge-switch',
     'edge-router',
+    'tier-2',
+    'super-spine',
     'core-router',
     'core-switch',
+    'tier-1',
+    'spine',
+    'pod',
     'distribution-router',
     'distribution-switch',
+    'tier-0',
     'leaf',
-    'spine',
-    'access-switch'
+    'tor',
+    'access-switch',
+    'host'
 )
 
 
 nr = InitNornir(config_file=NORNIR_CONFIG_FILE)
+
+role_capability_map = {
+    'station': 'host'
+}
 
 icon_capability_map = {
     'router': 'router',
@@ -274,6 +285,8 @@ def generate_topology_json(*args):
             device_serial = facts[host].get('serial_number', 'n/a')
             device_role = facts[host].get('nr_role', 'undefined')
             device_ip = facts[host].get('nr_ip', 'n/a')
+        if device_role == 'undefined':
+            device_role = role_capability_map.get(lldp_capabilities_dict.get(host, ''), 'undefined')
         host_id_map[host] = host_id
         topology_dict['nodes'].append({
             'id': host_id,
