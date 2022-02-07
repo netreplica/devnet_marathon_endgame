@@ -103,6 +103,7 @@ interface_full_name_map = {
     'Fa': 'FastEthernet',
     'Gi': 'GigabitEthernet',
     'Te': 'TenGigabitEthernet',
+    'Ma': 'Management',
 }
 
 
@@ -229,6 +230,8 @@ def extract_lldp_details(lldp_data_dict):
         if not lldp_data:
             continue
         for interface, neighbors in lldp_data.items():
+            if if_fullname(interface).startswith("Management") :
+                continue
             for neighbor in neighbors:
                 if not neighbor['remote_system_name']:
                     continue
