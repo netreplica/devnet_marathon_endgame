@@ -1,1 +1,3 @@
-nornir==2.4.0
+nornir==3.1.1
+nornir_napalm
+ncclient==0.6.9
