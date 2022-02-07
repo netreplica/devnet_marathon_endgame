@@ -31,7 +31,7 @@ import os
 import json
 
 from nornir import InitNornir
-from nornir.plugins.tasks.networking import napalm_get
+from nornir_napalm.plugins.tasks import napalm_get
 
 NORNIR_CONFIG_FILE = "nornir_config.yml"
 OUTPUT_TOPOLOGY_FILENAME = 'topology.js'
